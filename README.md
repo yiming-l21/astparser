@@ -1,5 +1,5 @@
 ## 代码预处理
-###生成抽象语法树
+### 生成抽象语法树
 本仓库基于[treesitter](https://github.com/tree-sitter/tree-sitter),能够将python,java,javascript,cpp,c#,typescript,php,go(按照codegeex代码翻译对应的八种语言)源文件解析生成python嵌套列表格式的ast。
 
 例如：
@@ -17,7 +17,7 @@ def factorial(n):
 #### 使用方式
 [setting.ipynb](/setting.ipynb)文件内code2ast函数，参数为language和filepath。<br>language标签如下："Python","Cpp","java","javascript","C-sharp","Go","PHP"。
 
-###解析语法文件
+### 解析语法文件
 [grammar.ipynb](/grammar.ipynb)文件内存有将各个语言grammar.json文件解析后得到的字典。<br>
 如cpp语法文件解析后字典：
 ```
