@@ -1,7 +1,7 @@
-func factorial(n uint64)(result uint64) {
-	int result = 1;
-    for (int i = 2; i <= n; ++i) {
-        result *= i;
+func factorial(n uint64) (result uint64){
+    if(n >0){
+       result = n*factorial(n-1)
+       return result
     }
-    return result;
-}
+    return 1
+ }

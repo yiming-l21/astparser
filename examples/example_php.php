@@ -1,3 +1,4 @@
+<?php
 function fact(int $n): int
 {
     $result = 1;
@@ -8,3 +9,4 @@ function fact(int $n): int
     }
     return $result;
 }
+?>
