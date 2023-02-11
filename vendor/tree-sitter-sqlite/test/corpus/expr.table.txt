@@ -1,0 +1,26 @@
+================================================================================
+expr.table
+================================================================================
+
+SELECT cname;
+SELECT tblname.cname;
+SELECT dbname.tblname.cname;
+
+--------------------------------------------------------------------------------
+
+(sql_stmt_list
+  (sql_stmt
+    (select_stmt
+      (SELECT)
+      (identifier)))
+  (sql_stmt
+    (select_stmt
+      (SELECT)
+      (identifier)
+      (identifier)))
+  (sql_stmt
+    (select_stmt
+      (SELECT)
+      (identifier)
+      (identifier)
+      (identifier))))

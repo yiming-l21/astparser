@@ -1,0 +1,113 @@
+===
+Decimals
+===
+
+5.3
+4
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement (number))
+      (statement (number)))))
+
+===
+Hex
+===
+
+0xA
+0xAB10CDEF
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement (number))
+      (statement (number)))))
+
+===
+Long suffix
+===
+
+123.0L
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (number (suffix))))))
+
+===
+Decimal suffix
+===
+
+123.0d
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (number (suffix))))))
+
+===
+Multiple suffixes
+===
+
+123.0Lkb
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (number (suffix) (suffix))))))
+
+===
+Expandable here string
+===
+
+@"
+  Anything in here is now part of a string
+"@
+
+---
+
+(script
+  (script_block
+      (statement_list (statement (expandable_here_string (expandable_string_chars))))))
+
+===
+Verbatim here string
+===
+
+@'
+  Anything in here is now part of a string
+'@
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (string)))))
+
+===
+Expandable here string with expandable string part
+===
+
+@"
+  Anything in here is now part of a string except $($true) which
+  is something else
+"@
+
+---
+
+(script
+  (script_block
+      (statement_list
+        (statement
+          (expandable_here_string
+            (expandable_string_chars)
+            (expandable_string_part (statement (boolean_value)))
+            (expandable_string_chars))))))

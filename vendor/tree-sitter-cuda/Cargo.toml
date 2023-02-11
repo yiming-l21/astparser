@@ -1,0 +1,27 @@
+[package]
+name = "tree-sitter-cuda"
+description = "cuda grammar for the tree-sitter parsing library"
+version = "0.20.2"
+keywords = ["incremental", "parsing", "cuda"]
+categories = ["parsing", "text-editors"]
+repository = "https://github.com/theHamsta/tree-sitter-cuda"
+edition = "2021"
+license = "MIT"
+authors = ["tree-sitter-cpp authors around Max Brunsfeld", "Stephan Seitz"]
+
+build = "bindings/rust/build.rs"
+include = [
+  "bindings/rust/*",
+  "grammar.js",
+  "queries/*",
+  "src/*",
+]
+
+[lib]
+path = "bindings/rust/lib.rs"
+
+[dependencies]
+tree-sitter = "0.20.1"
+
+[build-dependencies]
+cc = "1.0"

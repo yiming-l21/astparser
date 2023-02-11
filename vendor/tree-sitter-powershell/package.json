@@ -1,0 +1,20 @@
+{
+  "name": "tree-sitter-powershell",
+  "version": "0.1.0",
+  "description": "A tree-sitter grammar definition for the PowerShell language.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "tree-sitter-cli": "^0.10.2"
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test && tree-sitter --quiet --time"
+  },
+  "keywords": [
+    "parser",
+    "lexer"
+  ],
+  "author": "James R Sconfitto",
+  "license": "MIT"
+}

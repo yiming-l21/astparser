@@ -1,0 +1,406 @@
+===
+if 1
+===
+
+if ($true) {}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement (if (boolean_value) (statement_block))))))
+
+===
+if 2
+===
+
+if ($true) { $a }
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
+
+===
+if else
+===
+
+if ($true) { $a } else {}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list (statement (user_variable))))
+        (else (statement_block)))))))
+
+===
+while 1
+===
+
+while ($true) { $a }
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (while (boolean_value)
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
+
+===
+do while
+===
+
+do { $a } while ($true)
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (do (statement_block (statement_list (statement (user_variable))))
+          (boolean_value))))))
+
+===
+do until
+===
+
+do { $a } until ($true)
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (do
+          (statement_block
+            (statement_list (statement (user_variable))))
+          (boolean_value))))))
+
+===
+for 1
+===
+
+for (
+  $a
+  $b
+  $c
+)
+{
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (for
+          (pipeline (user_variable))
+          (pipeline (user_variable))
+          (pipeline (user_variable))
+          (statement_block (statement_list (statement (user_variable)))))))))
+
+===
+for w/ semicolons
+===
+
+for ( $a; $b; $c)
+{
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+    (statement
+      (for
+        (pipeline (user_variable)) (statement_terminator)
+        (pipeline (user_variable)) (statement_terminator)
+        (pipeline (user_variable))
+        (statement_block (statement_list (statement (user_variable)))))))))
+
+===
+for 2
+===
+
+for (
+  $a
+  $b
+)
+{
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+    (statement
+      (for
+        (pipeline (user_variable))
+        (pipeline (user_variable))
+        (statement_block (statement_list (statement (user_variable)))))))))
+
+===
+for 3
+===
+
+for (
+  $a
+)
+{
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (for
+          (pipeline (user_variable))
+          (statement_block (statement_list (statement (user_variable)))))))))
+
+===
+foreach
+===
+
+foreach ($a in $b) {
+  $true
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (foreach (user_variable) (user_variable)
+          (statement_block (statement_list (statement (boolean_value)))))))))
+
+===
+try catch finally (from spec 3.0)
+===
+
+try
+	{
+		# $a[$i] = 10
+		"Assignment completed without error"
+		# break
+	}
+	catch [IndexOutOfRangeException]
+	{
+		# "Handling out-of-bounds index, >$_<`n"
+		$i # = 5
+	}
+	catch
+	{
+		"Caught unexpected exception"
+	}
+	finally
+	{
+ 		# …
+	}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (try
+          (statement_block (comment) (statement_list (statement (string))) (comment))
+          (catch (type_literal (identifier))
+            (statement_block (comment) (statement_list (statement (user_variable))) (comment)))
+          (catch (statement_block (statement_list (statement (string)))))
+          (finally (statement_block (comment))))))))
+
+===
+trap
+===
+
+trap { $j }
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (trap
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
+
+===
+trap with type literal
+===
+
+trap
+[Exception]
+{
+  $j
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (trap
+          (type_literal (identifier))
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
+
+===
+break
+===
+
+if ($true) {
+  $a
+  break james
+}
+
+if ($true) {
+  $a
+  continue james
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list
+              (statement (user_variable))
+              (statement (flow_control_statement (flow_break_continue (identifier))))))))
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list
+              (statement (user_variable))
+              (statement (flow_control_statement (flow_break_continue (identifier)))))))))))
+
+===
+data
+===
+
+data importantInformation {
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (data (identifier)
+          (statement_block
+            (statement_list
+              (statement (user_variable)))))))))
+
+===
+data w/o name
+===
+
+data {
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (data (statement_block (statement_list (statement (user_variable)))))))))
+
+===
+switch
+===
+
+switch
+-regex
+-parallel
+($true)
+{
+  a {
+    $a
+  }
+
+  b {
+    $b
+  }
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (switch
+          (switch_parameter)
+          (switch_parameter)
+          (switch_condition (boolean_value))
+          (switch_body
+            (switch_clause (switch_clause_condition (identifier))
+              (statement_block
+                (statement_list (statement (user_variable)))))
+            (switch_clause (switch_clause_condition (identifier))
+              (statement_block
+                (statement_list (statement (user_variable)))))))))))
+
+===
+switch with short parameters
+===
+
+switch
+-reg
+-p
+($true)
+{
+  a {
+    $a
+  }
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement
+        (switch
+          (switch_parameter)
+          (switch_parameter)
+          (switch_condition (boolean_value))
+          (switch_body
+            (switch_clause (switch_clause_condition (identifier))
+              (statement_block
+                (statement_list (statement (user_variable)))))))))))

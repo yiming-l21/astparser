@@ -1,0 +1,19 @@
+============================================
+Comments
+============================================
+
+# this is a comment
+<#
+    Multiline comments!
+#>
+
+$a
+
+---
+
+(script
+  (comment)
+  (comment)
+  (script_block
+    (statement_list
+      (statement (user_variable)))))

@@ -1,0 +1,28 @@
+name: CI
+on:
+    pull_request:
+    push:
+jobs:
+    test:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: true
+            matrix:
+                os:
+                    - macos-11
+                    - ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v3.1.0
+            - uses: actions/setup-node@v3.5.1
+              with:
+                  node-version: 18
+            - uses: actions/cache@v3.0.11
+              with:
+                  path: ~/.local/share/pnpm/store
+                  key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: ${{ runner.os }}-pnpm-
+            - run: |
+                  corepack enable pnpm
+                  pnpm install
+                  pnpm store prune
+            - run: make test

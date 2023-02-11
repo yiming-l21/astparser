@@ -1,0 +1,490 @@
+==================
+Class interface: Empty
+==================
+
+@interface ClassName
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)))
+
+
+==================
+Class interface: Superclass
+==================
+
+@interface ClassName: SuperclassName
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)
+    superclass: (identifier)))
+
+
+==================
+Class interface: Protocol reference list
+==================
+
+@interface ClassName<Protocol1, Protocol2>
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)
+    protocols: (protocol_reference_list
+      (identifier)
+      (identifier))))
+
+
+==================
+Class interface: Instance Variables
+==================
+
+@interface ClassName {
+  type1 iv1;
+  type2 iv2;
+}
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)
+    (field_declaration
+      type: (type_identifier)
+      declarator: (field_identifier))
+    (field_declaration
+      type: (type_identifier)
+      declarator: (field_identifier))))
+
+
+==================
+Class interface: Property
+==================
+
+@interface ClassName
+@property (readwrite, copy) float value;
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)
+    (property_declaration
+      (readwrite)
+      (copy)
+      type: (type_identifier)
+      name: (identifier))))
+
+
+==================
+Method declaration: keyword selector
+==================
+
+@interface ClassName
++ (tr)k1: (t1)a1 : (t2)a2 k2: a3;
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)
+    (method_declaration
+      scope: (class_scope)
+      return_type: (type_descriptor
+        type: (type_identifier))
+      selector: (keyword_selector
+        (keyword_declarator
+          keyword: (identifier)
+          type: (type_descriptor
+              type: (type_identifier))
+          name: (identifier))
+        (keyword_declarator
+          type: (type_descriptor
+              type: (type_identifier))
+          name: (identifier))
+        (keyword_declarator
+          keyword: (identifier)
+          name: (identifier))))))
+
+
+==================
+Method declaration: unary selector
+==================
+
+@interface ClassName
+- (rt) sel;
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)
+    (method_declaration
+      scope: (instance_scope)
+      return_type: (type_descriptor
+        type: (type_identifier))
+      selector: (identifier))))
+
+
+==================
+Class implementation: Empty
+==================
+
+@implementation ClassName
+@end
+
+---
+
+(translation_unit
+  (class_implementation
+    name: (identifier)))
+
+
+==================
+Class implementation: Superclass
+==================
+
+@implementation ClassName: SuperclassName
+@end
+
+---
+
+(translation_unit
+  (class_implementation
+    name: (identifier)
+    superclass: (identifier)))
+
+
+==================
+Class implementation: Synthesize property
+==================
+
+@implementation ClassName
+@synthesize p1, p2=iv;
+@end
+
+---
+
+(translation_unit
+  (class_implementation
+    name: (identifier)
+    (synthesize
+      (synthesize_property
+        property: (identifier))
+      (synthesize_property
+        property: (identifier)
+        instance_variable: (identifier)))))
+
+
+==================
+Class implementation: Instance variable
+==================
+
+@implementation ClassName {
+  type1 iv1;
+}
+@end
+
+---
+
+(translation_unit
+  (class_implementation
+    name: (identifier)
+    (field_declaration
+      type: (type_identifier)
+      declarator: (field_identifier))))
+
+
+==================
+Instance variables: visibility specification
+==================
+
+@implementation ClassName {
+  @public
+  type2 iv2;
+}
+@end
+
+---
+
+(translation_unit
+  (class_implementation
+    name: (identifier)
+    (public)
+    (field_declaration
+      type: (type_identifier)
+      declarator: (field_identifier))))
+
+
+==================
+Method definition: keyword selector
+==================
+
+@implementation ClassName
++ (tr)k1: (in t1)a1 : (t2)a2 k2: a3 {
+}
+@end
+
+---
+
+(translation_unit
+  (class_implementation
+    name: (identifier)
+    (method_definition
+      scope: (class_scope)
+      return_type: (type_descriptor
+        type: (type_identifier))
+      selector: (keyword_selector
+        (keyword_declarator
+          keyword: (identifier)
+          type: (type_descriptor
+              (type_qualifier (protocol_qualifier))
+              type: (type_identifier))
+          name: (identifier))
+        (keyword_declarator
+          type: (type_descriptor
+              type: (type_identifier))
+          name: (identifier))
+        (keyword_declarator
+          keyword: (identifier)
+          name: (identifier)))
+      body: (compound_statement))))
+
+
+==================
+Method definition: unary selector
+==================
+
+@implementation ClassName
+- (rt) sel {
+}
+@end
+
+---
+
+(translation_unit
+  (class_implementation
+    name: (identifier)
+    (method_definition
+      scope: (instance_scope)
+      return_type: (type_descriptor
+        type: (type_identifier))
+      selector: (identifier)
+      body: (compound_statement))))
+
+
+==================
+Category interface: Empty
+==================
+
+@interface ClassName(Category)
+@end
+
+---
+
+(translation_unit
+  (category_interface
+    name: (identifier)
+    category: (identifier)))
+
+
+==================
+Category interface: Protocol reference list
+==================
+
+@interface ClassName(Category)<P1, P2>
+@end
+
+---
+
+(translation_unit
+  (category_interface
+    name: (identifier)
+    category: (identifier)
+    protocols: (protocol_reference_list
+      (identifier)
+      (identifier))))
+
+
+==================
+Category implementation
+==================
+
+@implementation ClassName(Category)
+@end
+
+---
+
+(translation_unit
+  (category_implementation
+    name: (identifier)
+    category: (identifier)))
+
+
+==================
+Protocol declaration
+==================
+
+@protocol Protocol<P1, P2>
+@end
+
+---
+
+(translation_unit
+  (protocol_declaration
+    name: (identifier)
+    protocols: (protocol_reference_list
+      (identifier)
+      (identifier))))
+
+
+==================
+Protocol declaration list
+==================
+
+@protocol <P1, P2>;
+
+---
+
+(translation_unit
+  (protocol_declaration_list
+    (identifier)
+    (identifier)))
+
+
+==================
+Class declaration list
+==================
+
+@class C1, C2;
+
+---
+
+(translation_unit
+  (class_declaration_list
+    (identifier)
+    (identifier)))
+
+
+==================
+Blocks: Pass Blocks as argument in method
+==================
+
+@interface ClassName
+- (void)method:(type1)argument1 secondValue:(void(^)(void))block;
+@end
+
+---
+
+(translation_unit
+  (class_interface
+    name: (identifier)
+    (method_declaration
+      scope: (instance_scope)
+      return_type: (type_descriptor
+        type: (primitive_type))
+      selector: (keyword_selector
+        (keyword_declarator
+          keyword: (identifier)
+          type: (type_descriptor
+            type: (type_identifier))
+          name: (identifier))
+        (keyword_declarator
+          keyword: (identifier)
+          type: (type_descriptor
+            type: (primitive_type)
+            declarator: (abstract_block_declarator
+              parameters: (parameter_list
+                (parameter_declaration
+                  type: (primitive_type)))))
+          name: (identifier))))))
+
+
+==================
+Blocks: Declare Blocks
+==================
+
+void ( ^ blocksName ) ( void );
+
+---
+
+(translation_unit
+  (declaration
+    type: (primitive_type)
+    declarator: (block_declarator
+      declarator: (identifier)
+      parameters: (parameter_list
+        (parameter_declaration
+          type: (primitive_type))))))
+
+
+==================
+Blocks: Blocks Literal
+==================
+
+void (^testBlock)(void) = ^{
+  return;
+};
+
+---
+
+(translation_unit
+  (declaration
+    type: (primitive_type)
+    declarator: (init_declarator
+      declarator: (block_declarator
+        declarator: (identifier)
+        parameters: (parameter_list
+          (parameter_declaration
+            type: (primitive_type))))
+      value: (block_expression
+        body: (compound_statement
+          (return_statement))))))
+
+
+==================
+Blocks: Pass Blocks as argument in message selector
+==================
+
+function([db A:a block:^int(Type *type) {
+  return 0;
+}]);
+
+---
+
+(translation_unit
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      arguments: (argument_list
+        (message_expression
+          receiver: (identifier)
+          selector: (keyword_argument_list
+            (keyword_argument
+              keyword: (identifier)
+              argument: (identifier))
+            (keyword_argument
+              keyword: (identifier)
+              argument: (block_expression
+                return_type: (primitive_type)
+                parameters: (parameter_list
+                  (parameter_declaration
+                    type: (type_identifier)
+                    declarator: (pointer_declarator
+                      declarator: (identifier))))
+                body: (compound_statement
+                  (return_statement
+                    (number_literal)))))))))))

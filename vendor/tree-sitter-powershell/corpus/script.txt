@@ -1,0 +1,22 @@
+===
+Blank script
+===
+
+---
+
+(script)
+
+===
+General script
+===
+
+PARAM()
+
+$a
+
+---
+
+(script
+  (script_block
+    (param_block (parameter_list))
+    (statement_list (statement (user_variable)))))
