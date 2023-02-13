@@ -1,5 +1,5 @@
 ## 代码预处理
-###生成抽象语法树
+### 生成抽象语法树
 本仓库基于[treesitter](https://github.com/tree-sitter/tree-sitter),能够将源文件解析生成python嵌套列表格式的ast。
 
 例如：
