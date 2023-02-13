@@ -1,8 +1,6 @@
-program HelloWorld;
-uses crt;
-
-(* Here the main program block starts *)
-begin
-   writeln('Hello, World!');
-   readkey;
-end. 
+{$mode delphi}
+{$define foo}
+{$ifdef foo}
+{$m+}
+{$I source.inc}
+{$endif}

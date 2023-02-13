@@ -79,9 +79,17 @@ LANGUAGE_TAG = {
 ```
 目前支持的语言：c,c#,c++,css,go,java,js,php,prolog,python,r,rust,ts,cuda,perl,scala,matlab,pascal,ruby,lua，dart,kotlin,html,lisp,tex，sql,object-c,fortran
 尚未支持的语言：objective-c++,swift,shell,vb,lean
-###解析语法文件
+### 解析语法文件
 [grammar.ipynb](/grammar.ipynb)文件内存有将各个语言grammar.json文件解析后得到的字典。
 
-TODO:
-把grammar.json文件中的name、members和content都提取出来为字典，下一步要比较不同语言字典的信息
+### 自动化测试
+检查下载的treesitter解析器能否通过自带的corpus测试，具体测试内容和方法在[test.ipynb](/test.ipynb)<br>
 
+
+TODO
+> 代码预处理——源代码拆分
+> > 将带有注释的整个源代码文件作为输入，利用treesitter生成的ast提供的结构性信息将含有多个类、函数以及引用类库的源文件拆分为多个完整的注释+类的形式，引用类库部分可以省略。
+
+
+> grammar.json文件语法树比对
+   > > 利用树匹配相关算法对不同语法文件的字典进行匹配，最终目的是提供统一的ast格式，不过鉴于任务可能比较复杂，一开始可以先通过树匹配算法找到类似的结构。任务可能比较复杂，长期工作。
