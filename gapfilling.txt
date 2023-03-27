@@ -1,0 +1,7 @@
+struct a
+{
+int a;
+int b;
+void get();
+
+};

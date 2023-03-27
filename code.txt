@@ -1,0 +1,131 @@
+#include <locale>
+#include <cassert>
+#include "test_iterators.h"
+
+typedef std::time_put<char, output_iterator<char*> > F;
+
+class my_facet
+    : public F
+{
+public:
+    explicit my_facet(std::size_t refs = 0)
+        : F(refs) {}
+};
+
+int main()
+{
+    const my_facet f(1);
+    char str[200];
+    output_iterator<char*> iter;
+    tm t;
+    t.tm_sec = 6;
+    t.tm_min = 3;
+    t.tm_hour = 13;
+    t.tm_mday = 2;
+    t.tm_mon = 4;
+    t.tm_year = 109;
+    t.tm_wday = 6;
+    t.tm_yday = -1;
+    t.tm_isdst = 1;
+    std::ios ios(0);
+    {
+        std::string pat("Today is %A which is abbreviated %a.");
+        iter = f.put(output_iterator<char*>(str), ios, '*', &t,
+                     pat.data(), pat.data() + pat.size());
+        std::string ex(str, iter.base());
+        assert(ex == "Today is Saturday which is abbreviated Sat.");
+    }
+    {
+        std::string pat("The number of the month is %Om.");
+        iter = f.put(output_iterator<char*>(str), ios, '*', &t,
+                     pat.data(), pat.data() + pat.size());
+        std::string ex(str, iter.base());
+        assert(ex == "The number of the month is 05.");
+    }
+}
+
+
+//-----------------------------------------------------------------------------
+int ccount = 0;
+void MyGlDraw(void)
+{
+	//*************************************************************************
+	// Chame aqui as funções do mygl.h
+	//*************************************************************************
+	
+
+	// EXPERIMENTAL: Desenha e preenche um triângulo na tela.
+	// Example_FilledTriangle(ccount);
+
+
+	
+
+	// Preenche o background. Para cada valor no argumento, desenha uma reta de um ponto a outro.
+	Example_Slide(ccount);
+
+	// Desenha um triângulo pré-definido.
+	Example_Triangle();
+
+	// Desenha uma espécie de asterisco. Quanto maior o argumento, maior a quantidade de retas.
+	Example_Asterisk(256);
+	
+
+
+	ccount++;
+}
+
+//-----------------------------------------------------------------------------
+int main(int argc, char **argv)
+{
+	// Inicializações.
+	InitOpenGL(&argc, argv);
+	InitCallBacks();
+	InitDataStructures();
+
+	// Ajusta a função que chama as funções do mygl.h
+	DrawFunc = MyGlDraw;	
+
+	// Framebuffer scan loop.
+	glutMainLoop();
+
+	return 0;
+}
+
+
+
+namespace OgrO // Namespace com o nome do jogo.
+{
+    namespace PhysicalEntities // Namespace do Pacote Entities.
+    {
+        namespace Characters // Namespace do Pacote Personagens.
+        {
+            namespace Enemies // Namespace do Pacote Enemies.
+            {
+                class Dragon : public Enemy
+                {
+                public:
+                    // Construtora da classe Dragon.
+                    Dragon(Utilities::gameVector2F pos, Utilities::gameVector2F s, const char *tPath = nullptr);
+                    Dragon(nlohmann::json source);
+                    // Destrutora da classe Dragon.
+                    ~Dragon();
+                    // Método carrega a textura do Dragon na window e inicializa gerenciadores do mesmo.
+                    void initialize();
+
+                    void update(float t);
+                    // Método verifica colisão entre dois objetos da classe Entidade Física.
+                    void collided(int idOther, Utilities::gameVector2F positionOther, Utilities::gameVector2F dimensionOther);
+                };
+            }
+        }
+    }
+}
+#endif
+
+
+
+
+
+
+
+
